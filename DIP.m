@@ -1,14 +1,13 @@
-%%%%%%%%%%Code preapared for project work%%%%%%%%%%
-%%%%%%%%%%Author:  %%%%%%%%%%
+%%%%%%%%%%Intelligent Traffic System - Digital Image Processing%%%%%%%%%%
+%%%%%%%%%%Author: Shanthini, Soundarya, Stinsha %%%%%%%%%%
 clc;
 close all;
 clear all;
 
 
-%%%%%%%%%%Reference Image%%%%%%%%%%
-script2()
+mainFunction()
 
-function [] = script2()
+function [] = mainFunction()
     PedestrianClicked = false;
     ElderlyDisabledClicked = false;
     redColor = '#B81D13';
@@ -130,25 +129,25 @@ function [] = script2()
     end
     
 
-    function stopTraffic(inSecs, forSecs)
-        while inSecs
-            set(statusText, 'String', strcat("Traffic stops in ", num2str(inSecs), " secs"));
+    function stopTraffic(stopTrafficInSecs, pedestrianForSecs)
+        while stopTrafficInSecs
+            set(statusText, 'String', strcat("Traffic stops in ", num2str(stopTrafficInSecs), " secs"));
             pause(1);
-            inSecs = inSecs - 1;
+            stopTrafficInSecs = stopTrafficInSecs - 1;
         end
         set(statusText, 'String', strcat("Traffic light is yellow"));
         setBtnColor(TrafficLightBtn, yellowColor);
         pause(3)
-        set(statusText, 'String', strcat("Traffic stopped now and Pedestrian walk starts for ", num2str(forSecs), " secs"));
+        set(statusText, 'String', strcat("Traffic stopped now and Pedestrian walk starts for ", num2str(pedestrianForSecs), " secs"));
         setBtnColor(TrafficLightBtn, redColor);
         pause(6)
         
     
         setBtnColor(PedestrianLightBtn, greenColor);
-        while forSecs
-            set(statusText, 'String', strcat("Pedestrian walk stops in ", num2str(forSecs), " secs"));
+        while pedestrianForSecs
+            set(statusText, 'String', strcat("Pedestrian walk stops in ", num2str(pedestrianForSecs), " secs"));
             pause(1);
-            forSecs = forSecs - 1;
+            pedestrianForSecs = pedestrianForSecs - 1;
         end
         setBtnColor(TrafficLightBtn, greenColor);
         setBtnColor(PedestrianLightBtn, redColor);
@@ -244,7 +243,7 @@ function [] = script2()
         end
         end
         if isCapturedImage
-            f = figure('Name','Processed Image', 'Position', [300 500 600 800]);
+            f = figure('Name','Processed Image', 'Position', [300 0 600 800]);
             subplot(5,2,[1,4]);
             imagesc(RGB);
             title('Original Image:');
