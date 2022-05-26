@@ -75,20 +75,15 @@ function [] = script2()
         PedestrianClicked = true;
         setBtnColor(PedestrianBtn, purpleColor);
         set(PedestrianBtn, 'Enable', 'off');
-
-        set(statusText, 'String', 'Processing...');
-        w = waitbar(0,'Capturing traffic Image...');
-        pause(.5)
-
-        waitbar(.33,w,'Processing Image');
+        set(statusText, 'String', 'Processing Image...');
+        pause(1)
         NVI2 = processImage(vidFrame, true);
-        waitbar(.65,w,'Finished Processing Image');
+        set(statusText, 'String', 'Finished Processing Image, Now matching it with reference image...');
+        pause(1)
         %%%%%%%%%%Image Matching%%%%%%%%%%
-        pause(.5)
-        waitbar(.65,w,'Match it with Reference Image');
         match = 0;
-        BW1 = im2bw(NVI1);
-        BW2 = im2bw(NVI2);
+        BW1 = imbinarize(NVI1);
+        BW2 = imbinarize(NVI2);
         for p = 1 : 511
             for q = 1 : 511
                 if (BW1(p, q) == BW2(p,q))
@@ -98,9 +93,6 @@ function [] = script2()
         end
         
         match;
-        waitbar(1,w,'Finishing');
-        pause(1)
-        close(w)
 
         
         %%%%%%%%%%Output Display%%%%%%%%%%
