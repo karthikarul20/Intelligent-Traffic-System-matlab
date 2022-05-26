@@ -19,17 +19,17 @@ function [] = script2()
     whiteColor = '#ffffff';
     blackColor = '#000000';
 
-    f = figure('Name','Live Traffic', 'Position', [100 100 800 500]);
+    f = figure('Name','Image Processing', 'Position', [100 100 500 500]);
 
-    matchText = uicontrol(gcf, 'Style','text', 'String', '', 'Position', [250 450 300 50], 'FontSize', 16);
-    statusText = uicontrol(gcf, 'Style','text', 'String', '', 'Position', [250 380 300 70], 'FontSize', 14);
+    matchText = uicontrol(gcf, 'Style','text', 'String', '', 'Position', [100 375 300 100], 'FontSize', 16);
+    statusText = uicontrol(gcf, 'Style','text', 'String', '', 'Position', [100 350 300 100], 'FontSize', 15);
     
-    TrafficLightBtn = uicontrol(gcf,'Style', 'push','BackgroundColor', greenColor, 'String', 'Traffic','Position', [0 400 200 100], 'FontSize', 16, 'ForegroundColor', whiteColor);
-    PedestrianLightBtn = uicontrol(gcf,'Style', 'push','BackgroundColor', redColor, 'String', 'Pedestrian','Position', [600 400 200 100], 'FontSize', 16, 'ForegroundColor', whiteColor);
+    TrafficLightBtn = uicontrol(gcf,'Style', 'push','BackgroundColor', greenColor, 'String', 'Traffic','Position', [0 400 100 100], 'FontSize', 16, 'ForegroundColor', whiteColor);
+    PedestrianLightBtn = uicontrol(gcf,'Style', 'push','BackgroundColor', redColor, 'String', 'Pedestrian','Position', [400 400 100 100], 'FontSize', 16, 'ForegroundColor', whiteColor);
     
     
-    PedestrianBtn = uicontrol(gcf,'Style', 'push', 'String', 'Pedestrian Crossing','Position', [0 0 400 50],'CallBack', @PedestrianCallback, 'FontSize', 16, 'ForegroundColor', blackColor);
-    ElderlyDisabledBtn = uicontrol(gcf,'Style', 'push', 'String', 'Elderly/Person with disabilities','Position', [400 0 400 50],'CallBack', @ElderlyDisabledCallback, 'FontSize', 16, 'ForegroundColor', blackColor);
+    PedestrianBtn = uicontrol(gcf,'Style', 'push', 'String', 'Pedestrian Crossing','Position', [0 0 250 50],'CallBack', @PedestrianCallback, 'FontSize', 16, 'ForegroundColor', blackColor);
+    ElderlyDisabledBtn = uicontrol(gcf,'Style', 'push', 'String', 'Elderly/Person with disabilities','Position', [250 0 250 50],'CallBack', @ElderlyDisabledCallback, 'FontSize', 16, 'ForegroundColor', blackColor);
     
     
     
@@ -37,10 +37,10 @@ function [] = script2()
     NVI1 = processImage(imread("base.png"), false);
     liveTrafficAxes = axes;
     liveTrafficAxes.Units = 'pixels';
-    liveTrafficAxes.Position = [200 80 400 300];
+    liveTrafficAxes.Position = [100 70 300 300];
     vidFrame = [];
 
-    startLiveTrafficVideo();
+    startLiveTrafficVideo()
     function startLiveTrafficVideo()
         v = VideoReader('traffic.mpg');
         
@@ -252,7 +252,7 @@ function [] = script2()
         end
         end
         if isCapturedImage
-            f = figure('Name','Processed Image', 'Position', [300 500 600 800]);
+            figure;
             subplot(5,2,[1,4]);
             imagesc(RGB);
             title('Original Image:');
