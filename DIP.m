@@ -76,9 +76,27 @@ function [] = mainFunction()
         set(PedestrianBtn, 'Enable', 'off');
         set(statusText, 'String', 'Processing Image...');
         pause(1)
+
+        matchAndShowOutPut();
+        % set(matchText, 'String', 'No Traffic...');
+        % stopTraffic(20, 20);
+
+        
+    end
+    
+    function ElderlyDisabledCallback(source, event)
+        disp('ElderlyDisabledCallback');
+        ElderlyDisabledClicked = true;
+        setBtnColor(ElderlyDisabledBtn, purpleColor);
+        set(ElderlyDisabledBtn, 'Enable', 'off');
+        stopTraffic(2, 40);
+    end
+
+    function matchAndShowOutPut()
         NVI2 = processImage(vidFrame, true);
         set(statusText, 'String', 'Finished Processing Image, Now matching it with reference image...');
         pause(1)
+
         %%%%%%%%%%Image Matching%%%%%%%%%%
         match = 0;
         BW1 = imbinarize(NVI1);
@@ -95,7 +113,6 @@ function [] = mainFunction()
 
         
         %%%%%%%%%%Output Display%%%%%%%%%%
-        disp(match)
         if(match>233000)
             set(matchText, 'String', 'No Traffic...');
             % stop traffic in 2 secs and run Pedestrian walk for 20
@@ -118,14 +135,6 @@ function [] = mainFunction()
             %disp('Green signal will be displayed for 30 second');
             %disp('Red signal will be displayed for 30 seconds');
         end
-    end
-    
-    function ElderlyDisabledCallback(source, event)
-        disp('ElderlyDisabledCallback');
-        ElderlyDisabledClicked = true;
-        setBtnColor(ElderlyDisabledBtn, purpleColor);
-        set(ElderlyDisabledBtn, 'Enable', 'off');
-        stopTraffic(2, 40);
     end
     
 
